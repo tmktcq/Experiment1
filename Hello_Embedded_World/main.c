@@ -6,56 +6,45 @@
  */ 
 
 #include <avr/io.h>
-#include "delay_function.h"
-#include <util/delay.h> 
+#include "board.h"
 #include "LED.h"
-#include "gpio_output.h"
-
-
-#define LED_bit (7)
-unsigned char LED_State_g;
-
-void LED_Flash_Init(void);
-void LED_Flash_Change_State(void);
-
-
+#include "switch.h"
 
 int main(void)
 {
 	LED_Flash_Init();
-    while (1) 
-    {
-		_delay_ms(DELAY);
-		LED_Flash_Change_State();
-		_delay_ms(DELAY);
-	}
-}
-
-void LED_Flash_Init(void)
-{
-	GPIO_Output_Init(LED0_port, LED0_pin);
-	GPIO_Output_Init(LED0_port, LED0_pin); //FIXME
-	GPIO_Output_Init(LED0_port, LED0_pin); //FIXME
-
-	DDRC |=(1<<LED_bit);
-	PORTC &=~(1<<LED_bit);
-	LED_State_g=0;
-}
-
-void LED_Flash_Change_State(void)
-{
-	if(LED_State_g==0)
+	switch_Init();
+	while (1)
 	{
-		PORTC |=1<<LED_bit;
-		LED_State_g=1;
+		//poll switches
+		if (!switch_Read(SW0_port, SW0_pin))
+		{
+			LEDS_On(LED0_port, LED0_pin);
+			_delay_ms(100);
+			LEDS_Off(LED0_port, LED0_pin);
+			_delay_ms(400);
+		}
+		if (!switch_Read(SW1_port, SW1_pin))
+		{
+			LEDS_On(LED1_port, LED1_pin);
+			_delay_ms(100);
+			LEDS_Off(LED1_port, LED1_pin);
+			_delay_ms(400);
+		}
+		if (!switch_Read(SW2_port, SW2_pin))
+		{
+			LEDS_On(LED2_port, LED2_pin);
+			_delay_ms(100);
+			LEDS_Off(LED2_port, LED2_pin);
+			_delay_ms(400);
+		}
+		if (!switch_Read(SW3_port, SW3_pin))
+		{
+			LEDS_On(LED3_port, LED3_pin);
+			_delay_ms(100);
+			LEDS_Off(LED3_port, LED3_pin);
+			_delay_ms(400);
+		}
 	}
-	else
-	{
-		PORTC &=~1<<LED_bit;
-		LED_State_g=0;
-	}
+	return 0;
 }
-
-
-
-

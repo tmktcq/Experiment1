@@ -3,19 +3,21 @@
  *
  * Created: 9/4/2020 11:57:19 AM
  *  Author: tony tim ben
- */ 
-
-#include <avr/io.h>
+ */
 
 #ifndef BOARD_H_
 #define BOARD_H_
 
-#ifndef F_CPU 
+#include <avr/io.h>
+
+
+
+//#ifndef F_CPU 
 #define F_CPU (16000000UL)
-#endif
-#ifndef OSC_DIV  
+//#endif
+//#ifndef OSC_DIV  
 #define OSC_DIV (1)
-#endif
+//#endif
 
 typedef struct port_regs
 {
@@ -30,6 +32,6 @@ typedef struct port_regs
 #define PD ( ( volatile GPIO_port_t * ) 0x29 )
 #define PE ( ( volatile GPIO_port_t * ) 0x2C )
 
-#define DELAY 500 
+#define DELAY 10000 
 
 #endif /* BOARD_H_ */

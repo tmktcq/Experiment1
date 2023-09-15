@@ -1,4 +1,4 @@
-gpio_input.d gpio_input.o: .././gpio_input.c .././gpio_input.h \
+gpio_output.d gpio_output.o: .././gpio_output.c .././gpio_output.h \
  .././board.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\sfr_defs.h \
@@ -12,7 +12,7 @@ gpio_input.d gpio_input.o: .././gpio_input.c .././gpio_input.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\fuse.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\lock.h
 
-.././gpio_input.h:
+.././gpio_output.h:
 
 .././board.h:
 

@@ -6,12 +6,16 @@
  */
 
 #include "board.h"
+#include "gpio_output.h"
+
 #ifndef LED_H
 #define LED_H
 
-LEDS_Init(volatile GPIO_port_t *port_addr, uint8_t LED_pin);
-LEDS_Off(volatile GPIO_port_t *port_addr, uint8_t LED_pin);
-LEDS_On(volatile GPIO_port_t *port_addr, uint8_t LED_pin); 
+void LEDS_Init(volatile GPIO_port_t *port_addr, uint8_t LED_pin);
+void LEDS_Off(volatile GPIO_port_t *port_addr, uint8_t LED_pin);
+void LEDS_On(volatile GPIO_port_t *port_addr, uint8_t LED_pin); 
+void LED_Flash_Init(void);
+void LED_Flash_Change_State(void); 
 
 #define LEDON (0)
 #define LEDOFF (1)
@@ -27,4 +31,5 @@ LEDS_On(volatile GPIO_port_t *port_addr, uint8_t LED_pin);
 
 #define LED3_port PA
 #define LED3_pin (1 << 7)
-#endif LED_H
+
+#endif
