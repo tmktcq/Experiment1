@@ -10,14 +10,8 @@
 
 #include <avr/io.h>
 
-
-
-//#ifndef F_CPU 
 #define F_CPU (16000000UL)
-//#endif
-//#ifndef OSC_DIV  
 #define OSC_DIV (1)
-//#endif
 
 //struct to simplify the offsets of port registers. Pointer to the struct is needed for proper use.
 typedef struct port_regs
@@ -36,4 +30,4 @@ typedef struct port_regs
 
 #define DELAY 10000 
 
-#endif /* BOARD_H_ */
+#endif
