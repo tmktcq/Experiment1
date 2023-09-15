@@ -19,6 +19,7 @@
 #define OSC_DIV (1)
 //#endif
 
+//struct to simplify the offsets of port registers. Pointer to the struct is needed for proper use.
 typedef struct port_regs
 {
     volatile uint8_t PIN_REG;
@@ -26,6 +27,7 @@ typedef struct port_regs
     volatile uint8_t PORT_REG;
 } GPIO_port_t;
 
+// structs defined for each port:
 #define PA ( ( volatile GPIO_port_t * ) 0x20 )
 #define PB ( ( volatile GPIO_port_t * ) 0x23 )
 #define PC ( ( volatile GPIO_port_t * ) 0x26 )
