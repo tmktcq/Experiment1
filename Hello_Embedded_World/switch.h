@@ -19,7 +19,9 @@
 
 #define PRESSED 0
 
+// Initializes all 4 switches by using the GPIO_Input_Init function
 void switch_Init();
+// Reads the current (parameterized) switch, includes a debounce within the conditional statement
 uint8_t switch_Read(volatile GPIO_port_t *port_addr, uint8_t pin_mask);
 
 #endif 

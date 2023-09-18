@@ -10,6 +10,8 @@
 #include "LED.h"
 #include "switch.h"
 
+// main uses a polling method to listen to all 4 switches, where each LED lights up depending
+// on the respective switch pressed.
 int main(void)
 {
 	LED_Flash_Init();

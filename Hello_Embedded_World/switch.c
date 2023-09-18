@@ -7,6 +7,7 @@
 
 #include "switch.h"
  
+// Initializes all 4 switches by using the GPIO_Input_Init function
 void switch_Init(void)
 {
   GPIO_Input_Init(SW0_port, SW0_pin, ENABLE);
@@ -15,6 +16,7 @@ void switch_Init(void)
   GPIO_Input_Init(SW3_port, SW3_pin, ENABLE);
 }
 
+// Reads the current (parameterized) switch, includes a debounce within the conditional statement
 uint8_t switch_Read(volatile GPIO_port_t *port_addr, uint8_t pin_mask)
 {
     uint8_t val = 1;
