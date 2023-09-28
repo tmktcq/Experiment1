@@ -212,6 +212,12 @@
     <Compile Include="mainLED.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="print_memory.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="print_memory.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="switch.c">
       <SubType>compile</SubType>
     </Compile>

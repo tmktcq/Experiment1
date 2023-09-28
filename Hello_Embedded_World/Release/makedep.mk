@@ -14,6 +14,8 @@ main.c
 
 mainLED.c
 
+print_memory.c
+
 switch.c
 
 UART.c
