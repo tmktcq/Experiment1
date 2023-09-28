@@ -8,9 +8,10 @@
 #ifndef BOARD_H_
 #define BOARD_H_
 
+#define F_CPU (16000000UL)
+
 #include <avr/io.h>
 
-#define F_CPU (16000000UL)
 #define OSC_DIV (1)
 
 //struct to simplify the offsets of port registers. Pointer to the struct is needed for proper use.
