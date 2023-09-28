@@ -12,6 +12,11 @@ Discarded input sections
  .text          0x00000000        0x0 gpio_input.o
  .data          0x00000000        0x0 gpio_input.o
  .bss           0x00000000        0x0 gpio_input.o
+ .text.GPIO_Input_Init
+                0x00000000       0x20 gpio_input.o
+ .text.GPIO_Input_Read
+                0x00000000        0xe gpio_input.o
+ .comment       0x00000000       0x31 gpio_input.o
  .text          0x00000000        0x0 delay_function.o
  .data          0x00000000        0x0 delay_function.o
  .bss           0x00000000        0x0 delay_function.o
@@ -21,21 +26,44 @@ Discarded input sections
  .text          0x00000000        0x0 gpio_output.o
  .data          0x00000000        0x0 gpio_output.o
  .bss           0x00000000        0x0 gpio_output.o
+ .text.GPIO_Output_Init
+                0x00000000        0xa gpio_output.o
+ .text.GPIO_Output_Set
+                0x00000000        0xa gpio_output.o
+ .text.GPIO_Output_Clear
+                0x00000000        0xc gpio_output.o
+ .comment       0x00000000       0x31 gpio_output.o
  .text          0x00000000        0x0 LED.o
  .data          0x00000000        0x0 LED.o
  .bss           0x00000000        0x0 LED.o
  .text.LEDS_Init
                 0x00000000        0x4 LED.o
+ .text.LEDS_Off
+                0x00000000        0x4 LED.o
+ .text.LEDS_On  0x00000000        0x4 LED.o
+ .text.LED_Flash_Init
+                0x00000000       0x50 LED.o
  .text.LED_Flash_Change_State
                 0x00000000       0x64 LED.o
  .bss.LED_State_g
                 0x00000000        0x1 LED.o
+ .comment       0x00000000       0x31 LED.o
  .text          0x00000000        0x0 main.o
  .data          0x00000000        0x0 main.o
  .bss           0x00000000        0x0 main.o
+ .text          0x00000000        0x0 mainLED.o
+ .data          0x00000000        0x0 mainLED.o
+ .bss           0x00000000        0x0 mainLED.o
+ .text.mainLED  0x00000000      0x196 mainLED.o
+ .comment       0x00000000       0x31 mainLED.o
  .text          0x00000000        0x0 switch.o
  .data          0x00000000        0x0 switch.o
  .bss           0x00000000        0x0 switch.o
+ .text.switch_Init
+                0x00000000       0x30 switch.o
+ .text.switch_Read
+                0x00000000       0x3a switch.o
+ .comment       0x00000000       0x31 switch.o
  .text          0x00000000        0x0 UART.o
  .data          0x00000000        0x0 UART.o
  .bss           0x00000000        0x0 UART.o
@@ -95,6 +123,7 @@ LOAD delay_function.o
 LOAD gpio_output.o
 LOAD LED.o
 LOAD main.o
+LOAD mainLED.o
 LOAD switch.o
 LOAD UART.o
 START GROUP
@@ -206,7 +235,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0x3ae
+.text           0x00000000      0x1a4
  *(.vectors)
  .vectors       0x00000000       0xcc C:/Program Files (x86)/Atmel/Studio/7.0/Packs/Atmel/ATmega_DFP/1.4.346/gcc/dev/atmega324pb/avr5/crtatmega324pb.o
                 0x00000000                __vector_default
@@ -316,49 +345,20 @@ END GROUP
                 0x000000f0                __vector_42
                 0x000000f4                . = ALIGN (0x2)
  *(.text.*)
- .text.GPIO_Input_Init
-                0x000000f4       0x20 gpio_input.o
-                0x000000f4                GPIO_Input_Init
- .text.GPIO_Input_Read
-                0x00000114        0xe gpio_input.o
-                0x00000114                GPIO_Input_Read
- .text.GPIO_Output_Init
-                0x00000122        0xa gpio_output.o
-                0x00000122                GPIO_Output_Init
- .text.GPIO_Output_Set
-                0x0000012c        0xa gpio_output.o
-                0x0000012c                GPIO_Output_Set
- .text.GPIO_Output_Clear
-                0x00000136        0xc gpio_output.o
-                0x00000136                GPIO_Output_Clear
- .text.LEDS_Off
-                0x00000142        0x4 LED.o
-                0x00000142                LEDS_Off
- .text.LEDS_On  0x00000146        0x4 LED.o
-                0x00000146                LEDS_On
- .text.LED_Flash_Init
-                0x0000014a       0x50 LED.o
-                0x0000014a                LED_Flash_Init
  .text.startup.main
-                0x0000019a      0x182 main.o
-                0x0000019a                main
- .text.switch_Init
-                0x0000031c       0x30 switch.o
-                0x0000031c                switch_Init
- .text.switch_Read
-                0x0000034c       0x3a switch.o
-                0x0000034c                switch_Read
+                0x000000f4       0x88 main.o
+                0x000000f4                main
  .text.UART_init
-                0x00000386       0x18 UART.o
-                0x00000386                UART_init
+                0x0000017c       0x18 UART.o
+                0x0000017c                UART_init
  .text.UART_transmit
-                0x0000039e        0xc UART.o
-                0x0000039e                UART_transmit
-                0x000003aa                . = ALIGN (0x2)
+                0x00000194        0xc UART.o
+                0x00000194                UART_transmit
+                0x000001a0                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x000003aa        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
-                0x000003aa                _exit
-                0x000003aa                exit
+ .fini9         0x000001a0        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+                0x000001a0                _exit
+                0x000001a0                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -377,11 +377,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x000003aa        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ .fini0         0x000001a0        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x000003ae                _etext = .
+                0x000001a4                _etext = .
 
-.data           0x00800100        0x0 load address 0x000003ae
+.data           0x00800100        0x0 load address 0x000001a4
                 [!provide]                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
@@ -399,8 +399,8 @@ END GROUP
  *(.bss*)
  *(COMMON)
                 0x00800100                PROVIDE (__bss_end, .)
-                0x000003ae                __data_load_start = LOADADDR (.data)
-                0x000003ae                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x000001a4                __data_load_start = LOADADDR (.data)
+                0x000001a4                __data_load_end = (__data_load_start + SIZEOF (.data))
 
 .noinit         0x00800100        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
@@ -448,12 +448,8 @@ END GROUP
 
 .comment        0x00000000       0x30
  *(.comment)
- .comment       0x00000000       0x30 gpio_input.o
+ .comment       0x00000000       0x30 main.o
                                  0x31 (size before relaxing)
- .comment       0x00000030       0x31 gpio_output.o
- .comment       0x00000030       0x31 LED.o
- .comment       0x00000030       0x31 main.o
- .comment       0x00000030       0x31 switch.o
  .comment       0x00000030       0x31 UART.o
 
 .note.gnu.avr.deviceinfo

@@ -14,13 +14,13 @@
 
 // main uses a polling method to listen to all 4 switches, where each LED lights up depending
 // on the respective switch pressed.
-int main(void)
+int mainLED(void)
 {
 	//exp 1 inits
 	LED_Flash_Init();
 	switch_Init();
 	//exp 2 inits
-	uint32_t BAUD_RATE = 9600; 
+	//uint32_t BAUD_RATE = 9600; 
 	UART_init(UART0, BAUD_RATE);
 	UART_init(UART1, BAUD_RATE);
 	UART_init(UART2, BAUD_RATE);

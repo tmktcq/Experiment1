@@ -30,6 +30,8 @@ void UART_transmit(volatile UART_t *UART_addr, uint8_t data);
 uint8_t UART_receive(volatile UART_t *UART_addr);
 
 
+#define BAUD_RATE (9600)
+
 /***** UARTS ******/
 
 #define UART0 ((volatile UART_t *) (0xC0U))
