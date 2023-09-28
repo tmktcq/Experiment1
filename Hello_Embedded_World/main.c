@@ -18,15 +18,17 @@
 // on the respective switch pressed.
 int main(void)
 {
+	UART_init(UART0, BAUD_RATE);
+	UART_init(UART1, BAUD_RATE);
+	UART_init(UART2, BAUD_RATE);
+	
 	char* print_buffer = export_print_buffer();
 	print_buffer = "wow"; 
 	sprintf(print_buffer, "print buffer is %f");
 	UART_transmit_string()
 	//exp 2 inits
 	//uint32_t BAUD_RATE = 9600; 
-	UART_init(UART0, BAUD_RATE);
-	UART_init(UART1, BAUD_RATE);
-	UART_init(UART2, BAUD_RATE);
+
 	
 	while (1)
 	{
