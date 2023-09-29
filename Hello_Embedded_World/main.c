@@ -16,7 +16,7 @@
 #include <string.h>
 #include "print_memory.h"
 
-const char string_name[15] PROGMEM = {"Hello World!\n\r\0"};
+const char string_name[15] PROGMEM = {"Hello World!\r\0"};
 const char group_members[]  = "Ben Brooks\n\r Tony Lessmeister\n\r Tim Kellermann\n\r"; 
 /*-----------------------------------------------------------------------------------
 
@@ -53,8 +53,8 @@ int main(void)
 		memset(print_buffer, 0, sizeof(uint8_t) * 80);
 		
 		/* This uses sprintf */
-		sprintf(print_buffer, "PRINT_BUFFER\n\r");
-		UART_transmit_string(UART1, print_buffer, 80);
+		sprintf(print_buffer, "\nPRINT_BUFFER");
+		UART_transmit_string(UART1, print_buffer, 14);
 		
 		/* this takes the length of the array and divides it by the size of 1 char 
 			why? 

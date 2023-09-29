@@ -27,6 +27,8 @@ void UART_init(volatile UART_t *UART_addr, uint16_t baud_rate);
 
 void UART_transmit(volatile UART_t *UART_addr, uint8_t data);
 
+uint8_t UART_receive_nb(volatile uint8_t *UART_addr, uint8_t *rcvd_value);
+
 uint8_t UART_receive(volatile UART_t *UART_addr);
 
 

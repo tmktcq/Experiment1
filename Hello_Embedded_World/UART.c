@@ -14,11 +14,10 @@ void UART_init(volatile UART_t *UART_addr, uint16_t baud_rate)
 // Calculate the baud rate reload value using the constants F_CPU,
 // OSC_DIV and U2X_bit. Write the values to UBRRH, UBRRL and set or
 // clear the U2X bit in UCSRA.
-    //uint16_t UBRR_value = Calc_Baudrate(baud_rate, U2X_Val); //Where do we get U2X
-    //uint16_t UBRR_value = (uint32_t)((((F_CPU / OSC_DIV) + (4UL * (2 - U2X_Val) * baud_rate)) / (8UL * (2 - U2X_Val) * baud_rate)) - 1);
     
-    uint16_t UBRR_value = 103;
-
+    //This should set UBRR_value to '103'
+    uint16_t UBRR_value = (uint32_t)((((F_CPU / OSC_DIV) + (4UL * (2 - U2X_Val) * baud_rate)) / (8UL * (2 - U2X_Val) * baud_rate)) - 1);
+    
     UART_addr->UART_UBRRH = UBRR_value / 256;
 	UART_addr->UART_UBRRL = UBRR_value % 256; 
     UART_addr->UART_UCSRA = (U2X_Val<<U2X); //set u2x here. currently off (0)
@@ -53,6 +52,10 @@ void UART_transmit(volatile UART_t *UART_addr, uint8_t data)
     return;
 }
 
+uint8_t UART_receive_nb(volatile uint8_t *UART_addr, uint8_t *rcvd_value)
+{
+    
+}
 
 uint8_t UART_receive(volatile UART_t *UART_addr)
 {
