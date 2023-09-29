@@ -10,6 +10,10 @@
 
 #include "board.h"
 
+#define BAUD_RATE (9600)
+
+// --- Struct Definitions --------------------------
+
 typedef struct UART
 {
 	volatile uint8_t UART_UCSRA;
@@ -21,30 +25,25 @@ typedef struct UART
 	volatile uint8_t UART_UDR;
 } UART_t;
 
-//uint32_t Calc_Baudrate(uint32_t baud_rate, uint8_t UtwoX);
+// --- Public Function Prototypes--------------------
 
 void UART_init(volatile UART_t *UART_addr, uint16_t baud_rate);
 
 void UART_transmit(volatile UART_t *UART_addr, uint8_t data);
 
-uint8_t UART_receive_nb(volatile uint8_t *UART_addr, uint8_t *rcvd_value);
+uint8_t UART_receive_nb(volatile UART_t *UART_addr, uint8_t *rcvd_value);
 
 uint8_t UART_receive(volatile UART_t *UART_addr);
 
-
-#define BAUD_RATE (9600)
-
-/***** UARTS ******/
+// --- UART Definitions ---------------------------
 
 #define UART0 ((volatile UART_t *) (0xC0U))
 #define UART1 ((volatile UART_t *) (0xC8U))
 #define UART2 ((volatile UART_t *) (0xD0U))
 
-// UCSRA flags
+// --- UCSRA flags -------------------------------
 #define RXCn 7  // RX Complete flag bit position in UCSRA
-
 #define U2X_Val 0
-//UBRR? mode and frame settings
 #define async_mode_1 (0<<6)
 #define async_mode_2 (0<<7)
 #define sync_mode (1<<6)
@@ -57,7 +56,7 @@ uint8_t UART_receive(volatile UART_t *UART_addr);
 #define two_stop_bits (1<<3)
 #define eight_bit_data (3<<1)
 
-//UCSRB
+// --- UCSRB flags ------------------------------
 #define RXEN_en (1<<4)
 #define RXEN_dis (0<<4)
 #define TXEN_en (1<<3)

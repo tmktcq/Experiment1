@@ -5,11 +5,10 @@
  * Author : tony tim ben
  */ 
 
-//#include <avr/io.h>
 #include "board.h"
 #include <util/delay.h>
 #include "LED.h"
-//#include "switch.h"
+#include "switch.h"
 #include "UART.h"
 #include <stdio.h>
 #include <avr/pgmspace.h>
@@ -27,10 +26,12 @@ UART_transmit_string() function.
 
 ------------------------------------------------------------------------------------*/
 
-// main uses a polling method to listen to all 4 switches, where each LED lights up depending
-// on the respective switch pressed.
 int main(void)
 {
+	//exp 1 inits
+	LED_Flash_Init();
+	// switch_Init();
+	//exp 2 inits
 	UART_init(UART0, BAUD_RATE);
 	UART_init(UART1, BAUD_RATE);
 	UART_init(UART2, BAUD_RATE);
@@ -39,29 +40,38 @@ int main(void)
 			
 	while (1)
 	{
+		// uint8_t val = UART_receive(UART1);
+		// UART_transmit(UART1, val);
+
+		uint8_t rcvd_val;
+        if (UART_receive_nb(UART1, &rcvd_val)) //if received nb
+		{
+			UART_transmit(UART1, rcvd_val);
+			UART_transmit(UART1, '\n');
+			UART_transmit(UART1, '\r');
+
+			/* This uses the string in flash mem to cpy  */ 
+			copy_string_to_buffer(string_name, print_buffer, 15); 
+			UART_transmit_string(UART1,print_buffer, 15); 
+			
+			/* this clears the buffer */ 
+			memset(print_buffer, 0, sizeof(uint8_t) * 80);
+			
+			/* This uses sprintf */
+			sprintf(print_buffer, "\nPRINT_BUFFER");
+			UART_transmit_string(UART1, print_buffer, 14);
+			
+			/* this takes the length of the array and divides it by the size of 1 char */
+			print_memory((uint8_t*)group_members, (uint16_t)(sizeof(group_members) / sizeof(uint8_t)) );
+			memset(print_buffer, 0, sizeof(uint8_t) * 80);
+		}
 		
-		uint8_t val = UART_receive(UART1);
-		UART_transmit(UART1, val);
-		UART_transmit(UART1, '\n');
-		UART_transmit(UART1, '\r');
-		
-		/* This uses the string in flash mem to cpy  */ 
-		copy_string_to_buffer(string_name, print_buffer, 15); 
-		UART_transmit_string(UART1,print_buffer, 15); 
-		
-		/* this clears the buffer */ 
-		memset(print_buffer, 0, sizeof(uint8_t) * 80);
-		
-		/* This uses sprintf */
-		sprintf(print_buffer, "\nPRINT_BUFFER");
-		UART_transmit_string(UART1, print_buffer, 14);
-		
-		/* this takes the length of the array and divides it by the size of 1 char 
-			why? 
-				im too lazy to count them... 
-		*/
-		print_memory((uint8_t*)group_members, (uint16_t)(sizeof(group_members) / sizeof(uint8_t)) );
-		memset(print_buffer, 0, sizeof(uint8_t) * 80);
+		LEDS_On(LED0_port, LED0_pin);
+		LEDS_On(LED1_port, LED1_pin);
+		_delay_ms(100);
+		LEDS_Off(LED0_port, LED0_pin);
+		LEDS_Off(LED1_port, LED1_pin);
+		_delay_ms(100);
 
 	}
 	return 0;

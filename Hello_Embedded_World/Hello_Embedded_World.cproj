@@ -209,9 +209,6 @@
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="mainLED.c">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="print_memory.c">
       <SubType>compile</SubType>
     </Compile>
