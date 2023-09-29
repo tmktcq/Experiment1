@@ -20,6 +20,7 @@ void UART_init(volatile UART_t *UART_addr, uint16_t baud_rate)
     
     UART_addr->UART_UBRRH = UBRR_value / 256;
 	UART_addr->UART_UBRRL = UBRR_value % 256; 
+    
     UART_addr->UART_UCSRA = (U2X_Val<<U2X); //set u2x here. currently off (0)
 
 // Determine the value for UCSRC using the settings for number of bits,
@@ -54,7 +55,17 @@ void UART_transmit(volatile UART_t *UART_addr, uint8_t data)
 
 uint8_t UART_receive_nb(volatile uint8_t *UART_addr, uint8_t *rcvd_value)
 {
-    
+    // Check if rxc bit is set, no while loop in order to prevent blocking
+    if (UART_addr->UART_UCSRA & (1 << RXCn))
+    {
+        // Byte is available, read it and store in rcvd_value
+        *rcvd_value = UART_addr->UART_UDR;
+        return 1;  // 1 indicates byte was received
+    }
+    else
+    {
+        return 0;  // 0 indicates no byte available
+    }
 }
 
 uint8_t UART_receive(volatile UART_t *UART_addr)
